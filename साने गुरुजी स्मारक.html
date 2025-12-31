@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>साने गुरुजी - महाराष्ट्र साहित्य संस्कृती</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        :root {
+            --color-bg: #faf8f3;
+            --color-text: #2d2416;
+            --color-accent: #8b7355;
+            --color-light-accent: #c4a876;
+            --spacing-line: 1.8;
+            --spacing-paragraph: 2rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Georgia', 'Noto Serif Devanagari', serif;
+            background: url('https://user-gen-media-assets.s3.amazonaws.com/seedream_images/dedf06ce-7b70-4a6e-9e88-2da7aca2d200.png') fixed center/cover;
+            background-attachment: fixed;
+            color: var(--color-text);
+            line-height: var(--spacing-line);
+            letter-spacing: 0.3px;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at center, rgba(250, 248, 243, 0.3) 0%, rgba(245, 241, 232, 0.5) 100%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Header / Title Section */
+        header {
+            text-align: center;
+            padding: 4rem 2rem 2rem;
+            border-bottom: 2px solid var(--color-accent);
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(25px) saturate(1.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            color: var(--color-accent);
+            font-weight: 400;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 10px rgba(139, 115, 85, 0.3),
+                        1px 1px 2px rgba(255, 255, 255, 0.5);
+            filter: drop-shadow(0 0 8px rgba(196, 168, 118, 0.2));
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--color-accent);
+            font-style: italic;
+            font-weight: 300;
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+
+        /* Main Content */
+        main {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .content-section {
+            margin-bottom: var(--spacing-paragraph);
+            padding: 2.5rem;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(196, 168, 118, 0.4);
+            border-left: 5px solid var(--color-light-accent);
+            border-radius: 12px;
+            backdrop-filter: blur(20px) saturate(1.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), 
+                        inset 0 1px 1px rgba(255, 255, 255, 0.3),
+                        0 0 40px rgba(139, 115, 85, 0.15);
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+        }
+
+        .content-section:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(196, 168, 118, 0.6);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15), 
+                        inset 0 1px 1px rgba(255, 255, 255, 0.4),
+                        0 0 60px rgba(139, 115, 85, 0.25);
+            transform: translateY(-4px);
+        }
+
+        .content-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(196, 168, 118, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(139, 115, 85, 0.05) 0%, transparent 50%),
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 3px,
+                    rgba(139, 115, 85, 0.015) 3px,
+                    rgba(139, 115, 85, 0.015) 6px
+                );
+            pointer-events: none;
+            border-radius: 12px;
+        }
+
+        .content-section p {
+            position: relative;
+            z-index: 1;
+        }
+
+        p {
+            font-size: 1.05rem;
+            line-height: var(--spacing-line);
+            color: var(--color-text);
+            margin-bottom: 1.5rem;
+            text-align: justify;
+            word-spacing: 0.05em;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+            letter-spacing: 0.4px;
+        }
+
+        p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Button Section */
+        .button-container {
+            text-align: center;
+            margin: 2rem 0;
+            padding: 2rem;
+        }
+
+        .download-btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, var(--color-accent), #a0824a);
+            color: #faf8f3;
+            border: 2px solid rgba(196, 168, 118, 0.6);
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: 'Georgia', serif;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+            text-decoration: none;
+            font-weight: 500;
+            text-transform: uppercase;
+            box-shadow: 0 8px 25px rgba(139, 115, 85, 0.3),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .download-btn:hover {
+            background: linear-gradient(135deg, #9d6e47, #b89968);
+            color: #faf8f3;
+            box-shadow: 0 12px 35px rgba(139, 115, 85, 0.4),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+            border-color: rgba(196, 168, 118, 0.8);
+        }
+
+        .download-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--color-accent);
+            opacity: 0.6;
+            font-size: 0.9rem;
+            border-top: 1px solid var(--color-light-accent);
+            margin-top: 3rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+                letter-spacing: 1px;
+            }
+
+            .subtitle {
+                font-size: 0.95rem;
+            }
+
+            main {
+                padding: 1.5rem 1rem;
+            }
+
+            .content-section {
+                padding: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            p {
+                font-size: 1rem;
+                line-height: 1.7;
+            }
+
+            .download-btn {
+                padding: 0.8rem 2rem;
+                font-size: 0.9rem;
+            }
+
+            header {
+                padding: 2rem 1rem 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.6rem;
+                letter-spacing: 0.5px;
+                margin-bottom: 0.3rem;
+            }
+
+            .subtitle {
+                font-size: 0.85rem;
+            }
+
+            main {
+                padding: 1rem;
+            }
+
+            .content-section {
+                padding: 1rem;
+                margin-bottom: 1rem;
+            }
+
+            p {
+                font-size: 0.95rem;
+                line-height: 1.65;
+                text-align: left;
+            }
+
+            .download-btn {
+                width: 100%;
+                padding: 0.75rem 1.5rem;
+                font-size: 0.85rem;
+            }
+
+            header {
+                padding: 0.5rem 0.5rem 0.5rem;
+            }
+
+            footer {
+                padding: 1.5rem 1rem;
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+            }
+
+            header, footer, .button-container {
+                display: none;
+            }
+
+            .content-section {
+                page-break-inside: avoid;
+                box-shadow: none;
+                background: white;
+                border-left: 2px solid var(--color-accent);
+            }
+
+            main {
+                max-width: 100%;
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>साने गुरुजी</h1>
+    </header>
+
+    <main id="printContent">
+        <div class="content-section">
+            <p>🌸 <strong>साने गुरुजी – प्रेम, त्याग आणि समाजसेवेचे प्रतीक</strong> 🌸</p>
+            <p>साने गुरुजी म्हणजे महाराष्ट्राला लाभलेले<br>सत्यनिष्ठ, सेवाभावी, प्रेमळ आणि श्रद्धाळू व्यक्तिमत्त्व.</p>
+            <p>ते केवळ साहित्यकार नव्हते, तर संपूर्ण आयुष्य देशसेवेस अर्पण करणारे<br>त्यागमूर्ती आणि समाजवादी विचारांचे बहुआयामी नेतृत्व होते.</p>
+        </div>
+
+        <div class="content-section">
+            <p>✨ <strong>गुरुजींचे विचार – आजही मार्गदर्शक</strong></p>
+            <p>आजच्या वेगवान आणि ग्लोबल युगात भौतिक प्रगती होत असली,<br>तरी मानवी मूल्यांचा ऱ्हास जाणवतो.</p>
+            <p>या पार्श्वभूमीवर साने गुरुजींनी मांडलेली प्रेम, समता, बंधुता आणि माणुसकीची मूल्ये<br>नव्या पिढीपर्यंत पोहोचणे अत्यंत आवश्यक आहे.</p>
+        </div>
+
+        <div class="content-section">
+            <p>📚 <strong>साहित्यसेवेपेक्षा लोकसेवा</strong></p>
+            <p>अवघ्या ५० वर्षांच्या आयुष्यात गुरुजींनी मराठी साहित्यात अमूल्य योगदान दिले.<br>त्यांचे साहित्य —<br>
+            प्रेम<br>जिव्हाळा<br>चांगुलपणा<br>यांनी ओथंबलेले आहे.<br>
+            कथा, कादंबऱ्या, कविता, निबंध, पत्रलेखन अशा विविध माध्यमांतून<br>त्यांनी समाजप्रबोधन केले.</p>
+            <p>🔖 <strong>श्यामची आई, धडपडणारी मुले, भारतीय संस्कृती</strong><br>हे साहित्य त्यांनी कारावासातच लिहिले.</p>
+            <p><em>गुरुजी म्हणत —<br>"माझे साहित्य म्हणजे साहित्यसेवा नव्हे, तर लोकसेवा आहे."</em></p>
+        </div>
+
+        <div class="content-section">
+            <p><strong>देशसेवा आणि संघर्ष</strong></p>
+            <p>घरची परिस्थिती हालाखीची असूनही,<br>वयाच्या तिशीत शिक्षकाची नोकरी सोडून<br>गुरुजींनी स्वतःला देशकार्यास अर्पण केले.</p>
+            <p><strong>शेतकरी व गिरणी कामगारांच्या हक्कांसाठी लढा</strong><br>अनेक आंदोलने, तुरुंगवास<br>अस्पृश्यता, जातीभेद यांचा तीव्र विरोध</p>
+            <p>🌼 पंढरपूरच्या विठ्ठल मंदिरात हरिजनांना प्रवेश मिळवून देण्याचे श्रेय साने गुरुजींनाच जाते.</p>
+            <p>🌍 <strong>समाजवादी विचार आणि 'आंतरभारती'</strong></p>
+            <p>गांधीजी, विनोबाजी आणि समाजवादी विचारांचा<br>गुरुजींच्या जीवनावर खोल प्रभाव होता.</p>
+            <p>स्वातंत्र्यानंतर भाषावार प्रांतरचनेमुळे<br>राष्ट्रीय एकात्मतेला धोका निर्माण होईल, हे ओळखून<br>गुरुजींनी '<strong>आंतरभारती</strong>' ही संकल्पना मांडली —<br>भारतातील विविध भाषा, साहित्य आणि संस्कृती यांचा सेतू.</p>
+        </div>
+
+        <div class="content-section">
+            <p>🕊️ <strong>अमृताचा पुत्र</strong></p>
+            <p>महात्मा गांधींच्या हत्येने गुरुजी अंतर्मुख झाले।<br>मानसिक वैफल्यातून त्यांनी जीवनयात्रा संपवली.</p>
+            <p>विनोबाजींनी ज्यांना<br><strong>"अमृताचा पुत्र"</strong> असे गौरवले,<br>ते साने गुरुजी</p>
+            <p>📅 <strong>११ जून १९५०</strong> रोजी<br>वयाच्या ५१व्या वर्षी स्वर्गवासी झाले.</p>
+            <p>🌼 <strong>संदेश</strong></p>
+            <p>प्रेम, त्याग, समता आणि माणुसकी<br>हेच साने गुरुजींचे खरे स्मारक आहे।</p>
+        </div>
+
+    </main>
+
+    <div class="button-container">
+        <button class="download-btn" onclick="downloadPDF()">अभिनंदन पत्र PDF मध्ये डाउनलोड करा</button>
+    </div>
+
+    <footer>
+        <p>साने गुरुजी स्मारक • महाराष्ट्र साहित्य संस्कृती केंद्र</p>
+    </footer>
+
+    <script>
+        function downloadPDF() {
+            const element = document.getElementById('printContent');
+            const header = document.querySelector('header');
+            
+            // Create a container for PDF content
+            const pdfContainer = document.createElement('div');
+            pdfContainer.style.padding = '40px';
+            pdfContainer.style.fontFamily = 'Georgia, serif';
+            pdfContainer.style.lineHeight = '1.8';
+            pdfContainer.style.fontSize = '14px';
+            pdfContainer.style.color = '#2d2416';
+            
+            // Add title
+            const title = document.createElement('h1');
+            title.textContent = 'साने गुरुजी';
+            title.style.textAlign = 'center';
+            title.style.marginBottom = '5px';
+            title.style.fontSize = '32px';
+            title.style.color = '#8b7355';
+            pdfContainer.appendChild(title);
+            
+            // Add subtitle
+            const subtitle = document.createElement('p');
+            subtitle.textContent = 'महाराष्ट्र साहित्य संस्कृती';
+            subtitle.style.textAlign = 'center';
+            subtitle.style.marginBottom = '30px';
+            subtitle.style.fontSize = '14px';
+            subtitle.style.color = '#8b7355';
+            subtitle.style.fontStyle = 'italic';
+            pdfContainer.appendChild(subtitle);
+            
+            // Add content
+            const sections = element.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                const p = document.createElement('p');
+                p.innerHTML = section.querySelector('p').innerHTML;
+                p.style.marginBottom = '15px';
+                p.style.textAlign = 'justify';
+                p.style.lineHeight = '1.8';
+                pdfContainer.appendChild(p);
+            });
+            
+            // Add footer
+            const footer = document.createElement('p');
+            footer.style.marginTop = '50px';
+            footer.style.textAlign = 'center';
+            footer.style.fontSize = '12px';
+            footer.style.color = '#8b7355';
+            footer.style.opacity = '0.6';
+            footer.textContent = 'साने गुरुजी स्मारक • महाराष्ट्र साहित्य संस्कृती केंद्र';
+            pdfContainer.appendChild(footer);
+            
+            // PDF configuration
+            const options = {
+                margin: [15, 15, 15, 15],
+                filename: 'साने_गुरुजी.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+                pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+            };
+            
+            html2pdf().set(options).from(pdfContainer).save();
+        }
+    </script>
+</body>
+</html>
